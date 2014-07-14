@@ -31,3 +31,11 @@ kubernetes/
 
 3 directories, 7 files
 ```
+
+## Build Kubernetes Docker Containers
+
+```
+for i in apiserver controller-manager kubecfg kubelet proxy
+  do docker build -t kelseyhightower/kubernetes-${i} docker/${i}
+done
+```
