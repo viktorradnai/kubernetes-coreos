@@ -3,7 +3,7 @@
 This how-to guide demostrates how to run [Google Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes) on [CoreOS](https://coreos.com)
 
 - [Quick Start](#quick-start)
-- [Building Kubernetes Docker containers](docs/containers.md)
+- [Building Kubernetes Binaries](docs/build.md)
 
 ## Quick Start
 
