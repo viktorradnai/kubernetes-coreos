@@ -4,7 +4,7 @@ Description=Kubernetes Proxy
 [Service]
 ExecStart=/opt/kubernetes/bin/proxy \
   --etcd_servers=http://127.0.0.1:4001 \
-  --logtostderr
+  --logtostderr=true
 
 [Install]
 WantedBy=multi-user.target

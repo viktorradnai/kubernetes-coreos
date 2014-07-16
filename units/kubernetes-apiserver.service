@@ -7,7 +7,7 @@ ExecStart=/opt/kubernetes/bin/apiserver \
   --port=8080 \
   --etcd_servers=http://127.0.0.1:4001 \
   --machines=127.0.0.1 \
-  --logtostderr
+  --logtostderr=true
 
 [Install]
 WantedBy=multi-user.target
