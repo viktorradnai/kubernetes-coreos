@@ -30,3 +30,24 @@ for i in apiserver controller-manager kubecfg kubelet proxy
   do docker build -t kelseyhightower/kubernetes-${i} docker/${i}
 done
 ```
+
+## Run the Containers
+
+### kelseyhightower/kubernetes-apiserver 
+
+```
+docker run -d --net=host kelseyhightower/kubernetes-apiserver \
+--address 0.0.0.0 \
+--etcd_servers http://127.0.0.1:4001 \
+--machines "127.0.0.1"
+```
+
+### kelseyhightower/kubernetes-kubelet
+```
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock --net=host \
+kelseyhightower/kubernetes-kubelet \
+--address=0.0.0.0 \
+--port 10250 \
+--etcd_servers http://127.0.0.1:4001 \
+--hostname_override="127.0.0.1"
+```
