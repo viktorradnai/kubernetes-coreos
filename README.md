@@ -38,13 +38,13 @@ sudo systemctl start kubernetes-proxy
 ### Run the Redis pod
 
 ```
-/opt/kubernetes/bin/kubecfg -h http://127.0.0.1:8080 -c kubernetes-coreos/pods/redis.json create /pods
+/opt/kubernetes/bin/kubecfg -c kubernetes-coreos/pods/redis.json create /pods
 ```
 
 #### List running pods
 
 ```
-/opt/kubernetes/bin/kubecfg -h http://127.0.0.1:8080 list /pods
+/opt/kubernetes/bin/kubecfg list /pods
 ```
 
 #### Test the redis server
@@ -58,5 +58,5 @@ docker run -t -i dockerfile/redis /usr/local/bin/redis-cli -h 172.17.42.1
 ### Delete the pod
 
 ```
-/opt/kubernetes/bin/kubecfg -h http://127.0.0.1:8080 delete /pods/redis
+/opt/kubernetes/bin/kubecfg delete /pods/redis
 ```
