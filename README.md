@@ -14,7 +14,6 @@ sudo mkdir -p /opt/kubernetes/bin
 cd /opt/kubernetes
 sudo wget https://github.com/kelseyhightower/kubernetes-coreos/releases/download/v0.0.2/kubernetes-coreos.tar.gz
 sudo tar -xvf kubernetes-coreos.tar.gz -C /opt/kubernetes/bin
-sudo chmod +x apiserver  controller-manager  kubecfg  kubelet proxy
 ```
 
 ### Add the Kubernetes systemd units
