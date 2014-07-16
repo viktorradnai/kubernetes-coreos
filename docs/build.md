@@ -7,7 +7,7 @@ Built the binaires using docker. The resulting image exports a data volume conta
 ```
 git clone https://github.com/kelseyhightower/kubernetes-coreos.git
 cd kubernetes-coreos
-docker build -t kelseyhightower/kubernetes-binaries:latest docker/build
+docker build -t kelseyhightower/kubernetes-binaries:latest .
 ```
 
 ### Copy the Binaries
