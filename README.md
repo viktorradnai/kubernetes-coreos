@@ -1,24 +1,27 @@
 # Kubernetes CoreOS
 
-This how-to guide demostrates how to run [Google Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes) on [CoreOS](https://coreos.com)
+This how-to guide demostrates how to setup [Google Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes) on [CoreOS](https://coreos.com)
 
 - [Quick Start](#quick-start)
 - [Building Kubernetes Binaries](docs/build.md)
+- [Networking Guide](docs/networking.md)
+- [Installation Guide](docs/installation.md)
 
 ## Quick Start
 
-### Install Linux binaries
+The following steps will setup a single node Kubernetes cluster. For a more robust setup using cloud-config see the [Installation Guide](docs/installation.md).
+
+### Install Kubernetes binaries
 
 ```
-sudo mkdir -p /opt/kubernetes/bin
-sudo wget https://github.com/kelseyhightower/kubernetes-coreos/releases/download/v0.0.2/kubernetes-coreos.tar.gz -O /opt/kubernetes/kubernetes-coreos.tar.gz
-sudo tar -xvf /opt/kubernetes/kubernetes-coreos.tar.gz -C /opt/kubernetes/bin
+sudo mkdir -p /opt/bin
+sudo wget http://storage.googleapis.com/kubernetes/binaries.tar.gz
+sudo tar -xvf binaries.tar.gz -C /opt/bin
 ```
 
 ### Add the Kubernetes systemd units
 
 ```
-cd $HOME
 git clone https://github.com/kelseyhightower/kubernetes-coreos.git
 sudo cp kubernetes-coreos/units/* /etc/systemd/system/
 ```
@@ -26,34 +29,36 @@ sudo cp kubernetes-coreos/units/* /etc/systemd/system/
 ### Start the Kubernetes services
 
 ```
-sudo systemctl start kubernetes-apiserver
-sudo systemctl start kubernetes-controller-manager
-sudo systemctl start kubernetes-kubelet
-sudo systemctl start kubernetes-proxy
+sudo systemctl start apiserver
+sudo systemctl start controller-manager
+sudo systemctl start kubelet
+sudo systemctl start proxy
 ```
 
-### Run the Redis pod
+### Running commands remotely
+
+Setup a SSH tunnel to the Kubernetes API Server.
 
 ```
-/opt/kubernetes/bin/kubecfg -c kubernetes-coreos/pods/redis.json create /pods
+sudo ssh -f -nNT -L 8080:127.0.0.1:8080 core@${APISERVER}
 ```
 
-#### List running pods
+Download a kubecfg client
+
+**Darwin**
 
 ```
-/opt/kubernetes/bin/kubecfg list /pods
+wget http://storage.googleapis.com/kubernetes/darwin/kubecfg -O /usr/local/bin/kubecfg
 ```
 
-#### Test the redis server
+**Linux**
 
 ```
-docker run -t -i dockerfile/redis /usr/local/bin/redis-cli -h 172.17.42.1
+wget http://storage.googleapis.com/kubernetes/kubecfg -O /usr/local/bin/kubecfg
 ```
 
-> 172.17.42.1 is the docker gateway
-
-### Delete the pod
+Issue commands remotely using the kubecfg command line tool.
 
 ```
-/opt/kubernetes/bin/kubecfg delete /pods/redis
+kubecfg list /pods
 ```
