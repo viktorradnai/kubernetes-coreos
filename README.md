@@ -11,11 +11,8 @@ This how-to guide demostrates how to run [Google Kubernetes](https://github.com/
 
 ```
 sudo mkdir -p /opt/kubernetes/bin
-cd /opt/kubernetes/bin
-wget https://github.com/kelseyhightower/kubernetes-coreos/releases/download/v0.0.2/kubernetes-coreos.tar.gz
-sudo tar -xvf kubernetes-coreos.tar.gz
-sudo chmod +x apiserver  controller-manager  kubecfg  kubelet proxy
-sudo rm kubernetes-coreos.tar.gz
+sudo wget https://github.com/kelseyhightower/kubernetes-coreos/releases/download/v0.0.2/kubernetes-coreos.tar.gz -O /opt/kubernetes/kubernetes-coreos.tar.gz
+sudo tar -xvf /opt/kubernetes/kubernetes-coreos.tar.gz -C /opt/kubernetes/bin
 ```
 
 ### Add the Kubernetes systemd units
