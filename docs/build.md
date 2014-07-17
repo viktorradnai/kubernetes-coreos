@@ -2,12 +2,12 @@
 
 ## Build the Binaries
 
-Built the binaires using docker. The resulting image exports a data volume containing the apiserver, kubecfg, proxy, kubelet, and controller-manager binaries under /kubernetes.
+Build the binaires using docker. The resulting image exports a data volume containing the apiserver, kubecfg, proxy, kubelet, and controller-manager binaries under /kubernetes.
 
 ```
 git clone https://github.com/kelseyhightower/kubernetes-coreos.git
 cd kubernetes-coreos
-docker build -t kelseyhightower/kubernetes-binaries:latest .
+docker build --no-cache -t kelseyhightower/kubernetes-binaries:latest .
 ```
 
 ### Copy the Binaries
