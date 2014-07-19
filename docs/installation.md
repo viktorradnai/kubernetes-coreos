@@ -23,10 +23,10 @@ The following cloud-config files can be used to setup a three node Kubernetes cl
 ```
 mkdir -p /tmp/new-drive/openstack/latest/
 ```
--
-
 ```
 cd configs
+```
+```
 for i in standalone master node1 node2; do
   cp configs/${i}.yml /tmp/new-drive/openstack/latest/user_data
   mkisofs -R -V config-2 -o ~/iso/${i}.iso /tmp/new-drive
