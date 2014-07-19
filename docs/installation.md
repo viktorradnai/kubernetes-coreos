@@ -18,6 +18,15 @@ The following cloud-config files can be used to setup a three node Kubernetes cl
 * node1.yml
 * node2.yml
 
+### Creating config-drives
+
+```
+for i in standalone master node1 node2; do
+  cp configs/${i}.yml /tmp/new-drive/openstack/latest/user_data
+  mkisofs -R -V config-2 -o ~/iso/${i}.iso /tmp/new-drive
+done
+```
+
 ## Remote Access
 
 Setup a SSH tunnel to the Kubernetes API Server.
