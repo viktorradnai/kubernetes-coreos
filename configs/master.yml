@@ -3,10 +3,12 @@
 hostname: master
 coreos:
   etcd:
+    name: master
     addr: 192.168.12.10:4001
     bind-addr: 0.0.0.0
-    discovery: https://discovery.etcd.io/35888e98a8a633296d3b53b2bf9a87fc
     peer-addr: 192.168.12.10:7001
+    peer-heartbeat-interval: 250
+    peer-election-timeout: 1000
   units:
     - name: static.network
       command: start
@@ -113,8 +115,8 @@ coreos:
         --etcd_servers=http://127.0.0.1:4001 \
         --machines=192.168.12.10,192.168.12.11,192.168.12.12 \
         --logtostderr=true
-        Restart=on-failure
-        RestartSec=1
+        Restart=always
+        RestartSec=2
 
         [Install]
         WantedBy=multi-user.target
@@ -131,8 +133,8 @@ coreos:
         --etcd_servers=http://127.0.0.1:4001 \
         --master=127.0.0.1:8080 \
         --logtostderr=true
-        Restart=on-failure
-        RestartSec=1
+        Restart=always
+        RestartSec=2
 
         [Install]
         WantedBy=multi-user.target
@@ -151,8 +153,8 @@ coreos:
         --hostname_override=192.168.12.10 \
         --etcd_servers=http://127.0.0.1:4001 \
         --logtostderr=true
-        Restart=on-failure
-        RestartSec=1
+        Restart=always
+        RestartSec=2
 
         [Install]
         WantedBy=multi-user.target
@@ -166,13 +168,13 @@ coreos:
 
         [Service]
         ExecStart=/opt/bin/proxy --etcd_servers=http://127.0.0.1:4001 --logtostderr=true
-        Restart=on-failure
-        RestartSec=1
+        Restart=always
+        RestartSec=2
 
         [Install]
         WantedBy=multi-user.target
   update:
     group: alpha
-    reboot-strategy: etcd-lock
+    reboot-strategy: off
 ssh_authorized_keys:
-    - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHo+5nVpxDhnWBPhEuQ7D7ZYELvA5+fPEWfHmMUwBdW069FSfX1LtbVAUKW7NGMfCxTijQMfvmFt7i+o28uqrVGN+xlDdkKTarPYO/Ux6Rukw0D5RZLVDVdRIOV8Si26pkFp4ezs1NFnCFsPTXD8U4cQ1lok//x248oKGsB4ZWuRNf4PCaIdXDveXdQRbaV5SDo9JEt9VkmfSraH5JENguP51RhFJYzWQAB1QbRZrHYUfZbE+pb/XDTdSPidfRCvss9fDrrhviZjv1Gr8C9jbmSGRB8pKwGC/GWV/mj8nYEY1K3/0c/N9NNIPtmvNkQjq7eGsSUf0cM8ZbwWugr8cB kelseyhightower"
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHo+5nVpxDhnWBPhEuQ7D7ZYELvA5+fPEWfHmMUwBdW069FSfX1LtbVAUKW7NGMfCxTijQMfvmFt7i+o28uqrVGN+xlDdkKTarPYO/Ux6Rukw0D5RZLVDVdRIOV8Si26pkFp4ezs1NFnCFsPTXD8U4cQ1lok//x248oKGsB4ZWuRNf4PCaIdXDveXdQRbaV5SDo9JEt9VkmfSraH5JENguP51RhFJYzWQAB1QbRZrHYUfZbE+pb/XDTdSPidfRCvss9fDrrhviZjv1Gr8C9jbmSGRB8pKwGC/GWV/mj8nYEY1K3/0c/N9NNIPtmvNkQjq7eGsSUf0cM8ZbwWugr8cB kelseyhightower
