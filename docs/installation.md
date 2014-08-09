@@ -22,16 +22,28 @@ The following cloud-config files can be used to setup a three node Kubernetes cl
 
 ```
 mkdir -p /tmp/new-drive/openstack/latest/
+mkdir -p ~/iso
 ```
 ```
 cd configs
 ```
+
+Using Linux:
 ```
 for i in standalone master node1 node2; do
-  cp configs/${i}.yml /tmp/new-drive/openstack/latest/user_data
+  cp ${i}.yml /tmp/new-drive/openstack/latest/user_data
   mkisofs -R -V config-2 -o ~/iso/${i}.iso /tmp/new-drive
 done
 ```
+
+Using OS X:
+```
+for i in standalone master node1 node2; do
+  cp ${i}.yml /tmp/new-drive/openstack/latest/user_data
+  hdiutil makehybrid -iso -joliet -joliet-volume-name "config-2" -joliet -o ~/iso/${i}.iso /tmp/new-drive
+done
+```
+
 
 ## Remote Access
 
