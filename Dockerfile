@@ -14,8 +14,11 @@ ENV PATH $PATH:$GOROOT/bin:$GOPATH/bin
 
 RUN mkdir -p /kubernetes/
 RUN mkdir -p $GOPATH/src/github.com/GoogleCloudPlatform
-WORKDIR $GOPATH/src/
+WORKDIR /gopath/src/
 RUN git clone --depth 1 https://github.com/GoogleCloudPlatform/kubernetes.git github.com/GoogleCloudPlatform/kubernetes
-RUN bash -x github.com/GoogleCloudPlatform/kubernetes/hack/build-go.sh
-RUN mv github.com/GoogleCloudPlatform/kubernetes/output/go/* /kubernetes/
+
+WORKDIR /gopath/src/github.com/GoogleCloudPlatform/kubernetes
+RUN pwd
+RUN bash -x ./hack/build-go.sh
+RUN mv output/go/* /kubernetes/
 VOLUME /kubernetes
