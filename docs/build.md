@@ -16,7 +16,7 @@ Run a named container and copy the binaries using the docker cp command.
 
 ```
 docker run --name kubernetes-binaries kelseyhightower/kubernetes-binaries:latest /bin/sh
-docker cp kubernetes-binaries:/kubernetes/ .
+docker cp kubernetes-binaries:/kubernetes-binaries/ .
 ```
 
 > Be sure to remove the existing container before doing do builds
