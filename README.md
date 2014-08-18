@@ -15,7 +15,7 @@ The following steps will setup a single node Kubernetes cluster. For a more robu
 
 ```
 sudo mkdir -p /opt/bin
-sudo wget http://storage.googleapis.com/kubernetes/binaries.tar.gz
+sudo wget https://storage.googleapis.com/kubernetes/binaries.tar.gz
 sudo tar -xvf binaries.tar.gz -C /opt/bin
 ```
 
@@ -48,13 +48,13 @@ Download a kubecfg client
 **Darwin**
 
 ```
-wget http://storage.googleapis.com/kubernetes/darwin/kubecfg -O /usr/local/bin/kubecfg
+wget https://storage.googleapis.com/kubernetes/darwin/kubecfg -O /usr/local/bin/kubecfg
 ```
 
 **Linux**
 
 ```
-wget http://storage.googleapis.com/kubernetes/kubecfg -O /usr/local/bin/kubecfg
+wget https://storage.googleapis.com/kubernetes/kubecfg -O /usr/local/bin/kubecfg
 ```
 
 Issue commands remotely using the kubecfg command line tool.
