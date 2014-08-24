@@ -104,9 +104,13 @@ coreos:
       command: start
       content: |
         [Unit]
+        After=etcd.service
+        After=download-kubernetes.service
         ConditionFileIsExecutable=/opt/bin/apiserver
         Description=Kubernetes API Server
         Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+        Wants=etcd.service
+        Wants=download-kubernetes.service
 
         [Service]
         ExecStart=/opt/bin/apiserver \
@@ -116,7 +120,7 @@ coreos:
         --machines=192.168.12.10,192.168.12.11,192.168.12.12 \
         --logtostderr=true
         Restart=always
-        RestartSec=2
+        RestartSec=10
 
         [Install]
         WantedBy=multi-user.target
@@ -124,16 +128,20 @@ coreos:
       command: start
       content: |
         [Unit]
+        After=etcd.service
+        After=download-kubernetes.service
         ConditionFileIsExecutable=/opt/bin/controller-manager
         Description=Kubernetes Controller Manager
         Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+        Wants=etcd.service
+        Wants=download-kubernetes.service
 
         [Service]
         ExecStart=/opt/bin/controller-manager \
         --master=127.0.0.1:8080 \
         --logtostderr=true
         Restart=always
-        RestartSec=2
+        RestartSec=10
 
         [Install]
         WantedBy=multi-user.target
@@ -141,9 +149,13 @@ coreos:
       command: start
       content: |
         [Unit]
+        After=etcd.service
+        After=download-kubernetes.service
         ConditionFileIsExecutable=/opt/bin/kubelet
         Description=Kubernetes Kubelet
         Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+        Wants=etcd.service
+        Wants=download-kubernetes.service
 
         [Service]
         ExecStart=/opt/bin/kubelet \
@@ -153,7 +165,7 @@ coreos:
         --etcd_servers=http://127.0.0.1:4001 \
         --logtostderr=true
         Restart=always
-        RestartSec=2
+        RestartSec=10
 
         [Install]
         WantedBy=multi-user.target
@@ -161,14 +173,18 @@ coreos:
       command: start
       content: |
         [Unit]
+        After=etcd.service
+        After=download-kubernetes.service
         ConditionFileIsExecutable=/opt/bin/proxy
         Description=Kubernetes Proxy
         Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+        Wants=etcd.service
+        Wants=download-kubernetes.service
 
         [Service]
         ExecStart=/opt/bin/proxy --etcd_servers=http://127.0.0.1:4001 --logtostderr=true
         Restart=always
-        RestartSec=2
+        RestartSec=10
 
         [Install]
         WantedBy=multi-user.target
