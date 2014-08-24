@@ -18,6 +18,7 @@ WORKDIR /gopath/src/
 RUN git clone --depth 1 https://github.com/GoogleCloudPlatform/kubernetes.git github.com/GoogleCloudPlatform/kubernetes
 
 WORKDIR /gopath/src/github.com/GoogleCloudPlatform/kubernetes
+RUN go get github.com/tools/godep
 RUN pwd
 RUN bash -x ./hack/build-go.sh
 RUN mv output/go/bin/* /kubernetes-binaries/
