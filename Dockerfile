@@ -21,5 +21,5 @@ WORKDIR /gopath/src/github.com/GoogleCloudPlatform/kubernetes
 RUN go get github.com/tools/godep
 RUN pwd
 RUN bash -x ./hack/build-go.sh
-RUN mv output/go/bin/* /kubernetes-binaries/
+RUN mv _output/go/bin/* /kubernetes-binaries/
 VOLUME /kubernetes-binaries
