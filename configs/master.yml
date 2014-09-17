@@ -124,6 +124,27 @@ coreos:
 
         [Install]
         WantedBy=multi-user.target
+
+    - name: scheduler.service
+      command: start
+      content: |
+        [Unit]
+        After=apiserver.service
+        ConditionFileIsExecutable=/opt/bin/scheduler
+        Description=Kubernetes Scheduler
+        Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+        Wants=apiserver.service
+
+        [Service]
+        ExecStart=/opt/bin/scheduler \
+        --logtostderr=true \
+        --master=127.0.0.1:8080
+        Restart=always
+        RestartSec=10
+
+        [Install]
+        WantedBy=multi-user.target
+
     - name: controller-manager.service
       command: start
       content: |
