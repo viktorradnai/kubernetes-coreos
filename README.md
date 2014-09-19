@@ -48,7 +48,8 @@ Download a kubecfg client
 **Darwin**
 
 ```
-wget https://storage.googleapis.com/kubernetes/darwin/kubecfg -O /usr/local/bin/kubecfg
+curl -o /usr/local/bin/kubecfg https://storage.googleapis.com/kubernetes/darwin/kubecfg
+chmod +x /usr/local/bin/kubecfg
 ```
 
 **Linux**
