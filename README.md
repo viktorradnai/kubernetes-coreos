@@ -30,6 +30,7 @@ sudo cp kubernetes-coreos/units/* /etc/systemd/system/
 
 ```
 sudo systemctl start apiserver
+sudo systemctl start scheduler
 sudo systemctl start controller-manager
 sudo systemctl start kubelet
 sudo systemctl start proxy
