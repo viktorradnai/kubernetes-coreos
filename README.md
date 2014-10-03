@@ -34,6 +34,7 @@ sudo systemctl start scheduler
 sudo systemctl start controller-manager
 sudo systemctl start kubelet
 sudo systemctl start proxy
+sudo systemctl start scheduler
 ```
 
 ### Running commands remotely
